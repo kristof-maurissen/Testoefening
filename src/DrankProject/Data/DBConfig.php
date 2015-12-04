@@ -1,7 +1,7 @@
 <?php
-//data/DBConfig.php
+//Data/DBConfig.php
 
-namespace VDAB\MijnProject\Data;
+namespace DrankProject\Data;
 
 class DBConfig { 
     

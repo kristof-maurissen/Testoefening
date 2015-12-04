@@ -20,6 +20,11 @@ img {
     width: 5em;
     height: 8em;
 }
+.content li {
+    text-decoration: none;
+    display: inline;
+    margin-left: 2em;
+}
 
 
 
