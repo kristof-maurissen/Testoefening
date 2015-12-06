@@ -16,41 +16,38 @@
                 <div class="content clearfix">
                     <ul>
                         <li>
-                            <a href="index.php?bedrag=0.10">€ 0,10</a>       
+                            <a href="index.php?bedrag=0.10">&euro;0,10</a>       
                         </li>
                         <li>
-                            <a href="index.php?bedrag=0.20">€ 0.20</a>
+                            <a href="index.php?bedrag=0.20">&euro;0.20</a>
                         </li>
                         <li>
-                            <a href="index.php?bedrag=0.50">€ 0.50</a>
+                            <a href="index.php?bedrag=0.50">&euro;0.50</a>
                         </li>
                         <li>
-                            <a href="index.php?bedrag=1">€ 1.00</a>
+                            <a href="index.php?bedrag=1">&euro;1.00</a>
                         </li>
                         <li>
-                            <a href="index.php?bedrag=2">€ 2.00</a>
+                            <a href="index.php?bedrag=2">&euro;2.00</a>
                         </li>
                     </ul> 
+                    <span class="totalInsert">Uw totaal : {{totaal}}&euro;</span>
                 </div>
             </div>
+        {% if check %}
+            Weergave : <br />
+            {% for munt,aantal in wisselgeld %}
+                {{aantal}} x &euro;{{munt}} <br />
+            {% endfor %}
+        {% endif %}
         
-        <aside>
-            <table>
-                <?php
-                foreach ($drankenLijst as $drank) {; 
-                ?>
-                <tr>
-                    <!--<td><?php// print ($drank->getFoto());?></td>-->
-                    <td><?php print($drank->getDrankNaam());?></td>
-                    <td>Prijs</td>
-                    <td><?php print ($drank->getPrijs());?></td>
-                    <td><?php print ($drank->getVoorraad());?></td>
-                </tr>
-                <?php 
-                }
-                ?>
-            </table>
-        </aside>
+        <h1>Kies uw drank</h1>
+        {% if errorVoorraad %}
+            <span class="error">De voorraad van deze drank is op, Maak een andere keuze !</span><br />
+        {% endif %}
+        {% for drank in drankenlijst %}
+        <a href="index.php?keuze={{drank.id}}">{{drank.dranknaam}}</a>
+        {% endfor %}
         </section>
          
             
@@ -58,4 +55,4 @@
         <footer>
             <div></div>
         </footer>
-    </body> 
+    </body>  
