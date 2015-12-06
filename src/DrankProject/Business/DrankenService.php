@@ -1,5 +1,6 @@
 <?php
 //src/DrankProject/Business/DrankenService.php
+
 namespace DrankProject\Business;
 use DrankProject\Data\DrankDAO;
 
@@ -12,18 +13,67 @@ class DrankenService {
         return $lijst; 
     }
     
-    public function updateVoorraad($id, $voorraad) {
+    public function checkTotaalIngegeven($totaal, $keuzedrank) {
         $drankDAO = new DrankDAO();
-        $drank = $drankDAO->getVooraadById($id);
-        $drank->setVoorraad($voorraad);
-        $drankDAO->updateDrank($drank);
+        $drank = $drankDAO->getDrankById($keuzedrank);
+        if($drank) {
+            if($totaal >= $drank->getPrijs()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
     
-    public function getRestVoorraad($id) {
+    public function berekenWissel($totaal, $keuzedrank){
         $drankDAO = new DrankDAO();
-        $lijst = $drankDAO->getVooraadById($id);
-        return $lijst;
+        $drank = $drankDAO->getDrankById($keuzedrank);
+        $rest = $totaal - $drank->getPrijs();
+        $wissel = array("2" => 0, "1" => 0, "0.5" => 0, "0.2" => 0, "0.1" => 0);
+        /*$wissel[0] = 0;
+        $wissel[1] = 0;
+        $wissel[2] = 0;
+        $wissel[3] = 0;
+        $wissel[4] = 0;*/
+        if($drank){
+            do{
+                if($rest >= 2){
+                    $wissel["2"]++;
+                    $rest -= 2;
+                }
+                else if($rest >= 1){
+                    $wissel["1"]++;
+                    $rest -= 1;
+                }
+                else if($rest >= 0.5){
+                    $wissel["0.5"]++;
+                    $rest -=0.5;
+                }
+                else if($rest >= 0.2){
+                    $wissel["0.2"]++;
+                    $rest -= 0.2;
+                }
+                else if($rest >= 0.1){
+                    $wissel["0.1"]++;
+                    $rest -= 0.1;
+                }
+                else{
+                    $rest = 0;
+                }
+            }while($rest > 0);
+        }
+        
+        return $wissel;
     }
+    
+    public function updateVoorraad($keuze) {
+        $drankDAO = new DrankDAO();
+        $drank = $drankDAO->getVooraadById($keuze);
+        $voorraad = $drank->getVoorraad();
+        $voorraad--;
+        $drankDAO->updateDrank($keuze, $voorraad);
+    }
+    
 }
 
 
