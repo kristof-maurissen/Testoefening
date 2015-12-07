@@ -11,19 +11,19 @@ class Dranken {
     private $dranknaam;
     private $prijs;
     private $voorraad;
-    private $foto;
     
-    private function __construct($id, $dranknaam, $prijs, $voorraad, $foto) {
+    
+    private function __construct($id, $dranknaam, $prijs, $voorraad) {
         $this->id = $id;
         $this->dranknaam = $dranknaam;
         $this->prijs = $prijs;
         $this->voorraad = $voorraad;
-        $this->foto = $foto;
+        
     }
     
-    public static function create($id, $dranknaam, $prijs, $voorraad, $foto) {
+    public static function create($id, $dranknaam, $prijs, $voorraad) {
         if (!isset(self::$idMap[$id])) {
-            self::$idMap[$id] = new Dranken($id, $dranknaam, $prijs, $voorraad,$foto);
+            self::$idMap[$id] = new Dranken($id, $dranknaam, $prijs, $voorraad);
         }
         return self::$idMap[$id];
     }
@@ -42,10 +42,6 @@ class Dranken {
     
     public function getVoorraad() {
         return $this->voorraad;
-    }
-    
-    public function getFoto() {
-        return $this->foto;
     }
     
     public function setVoorraad($voorraad) {

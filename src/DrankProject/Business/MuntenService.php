@@ -1,11 +1,7 @@
 <?php
 
-namespace Business\MuntenService;
+//src/DrankProject/Business/MuntenService.php
 
-class MuntenService {
-    
-    public function Waarde($bedrag) {
-        
-        
-    }
-}
+namespace DrankProject\Business;
+use DrankProject\Data\MuntenDAO;
+

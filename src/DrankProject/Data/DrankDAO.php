@@ -5,8 +5,7 @@ namespace DrankProject\Data;
 
 use DrankProject\Data\DBConfig;
 use DrankProject\Entities\Dranken;
-use DrankProject\Exceptions\VoorraadLeegExcept;
-
+use DrankProject\Exceptions\VoorraadLeegException;
 use PDO;
 
 class DrankDAO {
@@ -18,7 +17,7 @@ class DrankDAO {
         $lijst = array(); 
         
         foreach ($resultSet as $rij) {
-            $dranken = Dranken::create($rij["id"], $rij["dranknaam"], $rij["prijs"], $rij["voorraad"], $rij["foto"]); 
+            $dranken = Dranken::create($rij["id"], $rij["dranknaam"], $rij["prijs"], $rij["voorraad"]); 
             array_push($lijst, $dranken);  
         } 
             $dbh = null; 
@@ -41,7 +40,7 @@ class DrankDAO {
     public function updateDrank($id, $voorraad) {
         $drank = $this->getDrankById($id);
             if($drank->getVoorraad() <= 0 ) {
-                throw new VoorraadLeegExcept();
+               throw new VoorraadLeegException();
             }
             
         $sql = "update dranken set voorraad = :voorraad where id = :id";
