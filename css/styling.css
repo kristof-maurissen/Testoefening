@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-//div, aside, header, footer, section {outline:1px dashed red;}
+div, aside, header, footer, section {outline:1px dashed red;}
 body {
     font: 16px/1.4 "Lucida Grande", Sans-Serif; /* 1em = 16px */
     color:#333333;
