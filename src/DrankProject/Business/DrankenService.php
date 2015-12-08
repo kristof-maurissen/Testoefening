@@ -79,7 +79,12 @@ class DrankenService {
         $drankDAO->updateDrank($keuze, $voorraad);
     }
     
-    
+    Public function voegDrankToe($id, $voorraad) {
+        $drankDAO = new DrankDAO();
+        $drank = $drankDAO->getDrankById($id);
+        $drankVoorraad = $voorraad + $drank->getVoorraad();
+        $drankDAO->updateDrank($id, $drankVoorraad);
+    }
 }
 
 

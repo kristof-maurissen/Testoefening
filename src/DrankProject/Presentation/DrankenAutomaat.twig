@@ -49,31 +49,31 @@
         {% endfor %}<br/><br />
                  </div>
                 </div>
-                 <div>
-                   <form method="post" action="index.php?action=login"> 
-                <table> 
-                    <tr> 
-                        <td>Gebruikersnaam : </td> 
-                        <td> 
-                            <input type="text" name="txtGebruiker" /> 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td>Paswoord : </td> 
-                        <td> 
-                            <input type="password" name="txtPaswoord" /> 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td></td> 
-                        <td> 
-                            <input type="submit" value="Aanmelden" /> 
-                        </td> 
-                    </tr> 
-                </table> 
-                </form>  
-                     
-                 </div>
+    <div>
+        <form method="post" action="index.php?action=login"> 
+            <table> 
+                <tr> 
+                    <td>Gebruikersnaam : </td> 
+                    <td> 
+                        <input type="text" name="txtGebruiker" /> 
+                    </td> 
+                </tr> 
+                <tr> 
+                    <td>Paswoord : </td> 
+                    <td> 
+                        <input type="password" name="txtPaswoord" /> 
+                    </td> 
+                </tr> 
+                <tr> 
+                    <td></td> 
+                    <td> 
+                        <input type="submit" value="Aanmelden" /> 
+                    </td> 
+                </tr> 
+            </table> 
+        </form>  
+
+    </div>
         {% if errorLogin %}
             <p>Foutieve login !</p><br />
         {% endif %}         
@@ -81,3 +81,31 @@
         </section>
          
     </body>  
+
+    
+    
+    
+   <!-- <h2>Beschikbare frisdranken:</h2>
+
+            {%for frisdrank in frisdrankenLijst%}
+                <div class="artikel">Beschrijving:{{frisdrank.beschrijving}}<br/> Prijs:{{frisdrank.prijs}}&euro;<br/> Aantal:{{frisdrank.aantal}}<br/></div>
+
+                {%if bijvullen%}
+                    <form method="POST" action="adminController.php?action=voegtoe&artikel={{frisdrank.beschrijving}}">
+                        <input type="number" name="aantalBijvullen" /><br/>
+                        <input type="submit" value="Voeg toe" />
+                    </form>
+                {%endif%}
+                <hr>
+            {%endfor%}
+            
+            {%if errorTeHoog%}
+                te hooog
+            {%endif%}    
+            <h2>Acties:</h2>
+            <nav>
+                <ul>
+                    <li><a href="adminController.php?action=voegtoe">Bijvullen</a></li>
+                    <li><a href="adminController.php?action=logout">Afmelden</a></li>
+                </ul>
+            </nav>-->

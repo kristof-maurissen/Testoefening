@@ -37,10 +37,14 @@ class DrankDAO {
         $dbh = null; 
         return $dranken; 
     }
+    
     public function updateDrank($id, $voorraad) {
         $drank = $this->getDrankById($id);
             if($drank->getVoorraad() <= 0 ) {
                throw new VoorraadLeegException();
+            } else if($voorraad >= 20) {
+                throw new TeveelVoorraadException() ; 
+                
             }
             
         $sql = "update dranken set voorraad = :voorraad where id = :id";
@@ -50,7 +54,13 @@ class DrankDAO {
         $dbh = null;
     }
     
-    
+   /* public function voegDrankToe($id, $voorraad) {
+        $drank = $this->getDrankById($id);
+            if($voorraad >= 20) {
+                throw new TeveelVoorraadException() ;
+            }
+        
+    }*/
     
 }
 
