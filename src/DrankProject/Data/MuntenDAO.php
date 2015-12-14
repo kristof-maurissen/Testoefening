@@ -25,11 +25,25 @@ class MuntenDAO {
             return $lijst;        
     }
     
-    public function updateMunten($id, $twee, $een, $twintigcent, $tiencent) {
-        $sql = "update munten set twee = :twee, een = :een, halve = :halve, twintigcent = :twintigcent, tiencent = :tiencent where id = :id";
+    public function getMuntById($id) {
+        $sql = "select id, munt from munten where id = :id";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        
+        $stmt = $dbh->prepare($sql); 
+        $stmt->execute(array(':id' => $id)); 
+        $rij = $stmt->fetch(PDO::FETCH_ASSOC);
+         
+        $munten = munten::create($rij["id"], $rij["munt"]);
+        
+        $dbh = null; 
+        return $munten; 
+    }
+    
+    public function updateMunten($id, $munt) {
+        $sql = "update munten set :munt, :totaal where id = :id";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
-        $stmt->execute(array( ":twee" => $twee, ":een" => $een, ":halve" => $halve, ":twintigcent" => $twintigcent, ":tiencent" => $tiencent, ":id" => $id));
+        $stmt->execute(array(":id" => $id, ":munt" => $munt, "totaal" => $totaal));
         $dbh = null;
         
     }

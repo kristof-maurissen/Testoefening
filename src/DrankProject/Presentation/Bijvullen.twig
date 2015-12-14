@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<!-- src/DrankProject/Presentation/Bijvullen.php --> 
+ 
+    <head> 
+        <meta charset=utf-8> 
+        <title>Drankenautomaat bijvullen</title> 
+        <link rel="stylesheet" href="css/styling.css">
+    </head> 
+    <body>
+        <header class="clearfix">
+            <div class="header clearfix"><h2>Bijvullen frisdranken:</h2></div>
+        </header>
+        <section class="wrappercontent">
+                <div class="content clearfix">
+
+            {%for drank in drankenLijst%}
+                <div>Beschrijving:{{drank.dranknaam}}<br/> Prijs:{{drank.prijs}}&euro;<br/> Aantal:{{drank.voorraad}}<br/></div>
+
+                {%if bijvullen%}
+                    <form method="POST" action="bijvullen.php?action=voegtoe&artikel={{drank.id}}">
+                        <input type="number" name="aantalBijvullen" /><br/>
+                        <input type="submit" value="Voeg toe" />
+                    </form>
+                {%endif%}
+                <hr>
+            {%endfor%}
+                        
+            {%if errorTeHoog%}
+                te hoog
+            {%endif%}    
+            <h2>Keuze</h2>
+            <nav>
+                <ul>
+                    <li><a href="bijvullen.php?action=voegtoe">Bijvullen</a></li><br />
+                    <li><a href="index.php?action=logout">Afmelden</a></li>
+                </ul>
+            </nav>
+                </div>
+        </section>
+    </body>

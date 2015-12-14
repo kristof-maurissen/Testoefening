@@ -36,8 +36,9 @@ class DrankenService {
         $wissel[3] = 0;
         $wissel[4] = 0;*/
         if($drank){
-           do {
-                if($rest >= 2){
+         while($rest > 0) {
+             
+               if($rest >= 2){
                     $wissel["2"]++;
                     $rest -= 2;
                 }
@@ -45,11 +46,11 @@ class DrankenService {
                     $wissel["1"]++;
                     $rest -= 1;
                 }
-                if($rest >= 0.5){
+                 if($rest >= 0.5){
                     $wissel["0.5"]++;
                     $rest -=0.5;
                 }
-                if($rest = 0.4){
+                if($rest >= 0.4){
                     $wissel["0.2"]++;
                     $rest -= 0.2;
                 }
@@ -57,7 +58,7 @@ class DrankenService {
                     $wissel["0.2"]++;
                     $rest -= 0.2;
                 }
-                else if($rest >= 0.1){
+                if($rest >= 0.1){
                     $wissel["0.1"]++;
                     $rest -= 0.1;
                 }
@@ -65,7 +66,7 @@ class DrankenService {
                     $rest = 0;
                 }
            }
-           while($rest > 0);
+           
         }
         
         return $wissel;
@@ -79,11 +80,12 @@ class DrankenService {
         $drankDAO->updateDrank($keuze, $voorraad);
     }
     
-    Public function voegDrankToe($id, $voorraad) {
+    Public function voegDrankToe($keuze, $aantal) {
         $drankDAO = new DrankDAO();
-        $drank = $drankDAO->getDrankById($id);
-        $drankVoorraad = $voorraad + $drank->getVoorraad();
-        $drankDAO->updateDrank($id, $drankVoorraad);
+        $drank = $drankDAO->getDrankById($keuze);
+        $voorraad = $drank->getVoorraad();
+        $voorraad += $aantal;
+        $drankDAO->updateDrank($keuze, $voorraad);
     }
 }
 

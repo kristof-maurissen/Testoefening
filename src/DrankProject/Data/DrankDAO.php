@@ -39,10 +39,10 @@ class DrankDAO {
     }
     
     public function updateDrank($id, $voorraad) {
-        $drank = $this->getDrankById($id);
-            if($drank->getVoorraad() <= 0 ) {
+       $drank = $this->getDrankById($id);
+           if($drank->getVoorraad() <= 0 ) {
                throw new VoorraadLeegException();
-            } else if($voorraad >= 20) {
+            }   else if($voorraad > 20) {
                 throw new TeveelVoorraadException() ; 
                 
             }
@@ -53,14 +53,6 @@ class DrankDAO {
         $stmt->execute(array( ":voorraad" => $voorraad, ":id" => $id));
         $dbh = null;
     }
-    
-   /* public function voegDrankToe($id, $voorraad) {
-        $drank = $this->getDrankById($id);
-            if($voorraad >= 20) {
-                throw new TeveelVoorraadException() ;
-            }
-        
-    }*/
     
 }
 
