@@ -13,9 +13,9 @@ session_start();
     if(isset($_GET["bedrag"])) {
             $_SESSION["totaal"] += $_GET["bedrag"];
     }
-
+    $wissel = "";
     if(!isset($_GET["keuze"])) {
-            $wissel = "";
+            
             } else {
                 $check = $drankSvc->checkTotaalIngegeven($_SESSION["totaal"], $_GET["keuze"]);
                 if($check) {
